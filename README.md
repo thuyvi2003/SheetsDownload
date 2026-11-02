@@ -28,6 +28,21 @@ python -m venv .venv
 
 Trên Windows có thể chạy `start_windows.bat`. Dán link Sheet, chọn thư mục video, định dạng, số luồng và bộ lọc rồi bấm **Bắt đầu tải**.
 
+## Hai cách tải trong cùng ứng dụng
+
+- **Tải theo Sheet / Kênh:** cách tải ban đầu, nhập link Google Sheet rồi chọn bộ lọc và bấm **Bắt đầu tải**.
+- **Tải video đã chọn:** nhận video được chọn trực tiếp trên YouTube bằng extension Chrome. Chọn thư mục lưu một lần trong tab này.
+
+## Cài ứng dụng và extension Chrome
+
+1. Cài `VideoChannelDownloader-Setup.exe` và mở ứng dụng.
+2. Cài extension trong thư mục `chrome_extension` đi kèm ứng dụng. Với bản chưa phát hành trên Chrome Web Store, mở `chrome://extensions`, bật **Chế độ dành cho nhà phát triển**, chọn **Tải tiện ích đã giải nén** và trỏ đến thư mục đó.
+3. Bấm biểu tượng extension để bật công cụ trên YouTube. Khi cần chọn video, bấm **Bật chế độ chọn** ở thanh bên trái, kéo qua các ô hoặc bấm từng video. Sau đó chọn **Thêm vào danh sách** hoặc **Tải ngay**.
+
+Ứng dụng và extension tự kết nối qua `127.0.0.1` khi ứng dụng đang mở; không cần sao chép hay nhập mã. **Thêm vào danh sách** giữ video trong tab **Tải video đã chọn** để tải sau. **Tải ngay** đưa video vào hàng chờ tải tự động; nếu ứng dụng đang tải từ Google Sheet thì hàng chờ này bắt đầu khi lượt Sheet kết thúc. Bấm **Tắt tiện ích trên YouTube** trong popup khi muốn ẩn nút nổi.
+
+Hàng chờ được lưu trong `%APPDATA%\YouTubeChannelTool\selected_videos.sqlite3` trên Windows. Video đã tải được kiểm tra theo lịch sử hiện có để tránh tải trùng; việc chọn thủ công không áp dụng bộ lọc lượt xem/thời lượng của chế độ Google Sheet. Cầu nối chỉ lắng nghe trên `127.0.0.1`; extension gửi video trực tiếp khi ứng dụng đang mở.
+
 Nút dừng sẽ chờ các lượt đang tải kết thúc. Đóng cửa sổ cũng chờ các luồng giải phóng tài nguyên trước khi thoát.
 
 ## Lịch sử và lỗi
@@ -52,4 +67,4 @@ Các kiểm thử media chạy bằng FFmpeg thật nếu tìm được `ffmpeg`
 
 Chạy `build_windows.bat` trên máy đã cài Python, FFmpeg/FFprobe và Node.js. Script cài thư viện build vào môi trường riêng và tạo `dist/VideoChannelDownloader.exe`, kèm các runtime cần thiết. Nếu có Inno Setup 6, script tạo thêm bộ cài từ `windows_installer.iss`.
 
-Repository chỉ chứa mã nguồn, icon, tài liệu và kiểm thử. Không chứa file EXE, cookie, thiết lập cá nhân, lịch sử tải hay dữ liệu Google Sheets.
+Repository chỉ chứa mã nguồn, extension Chrome, icon, tài liệu và kiểm thử. Không chứa file EXE, cookie, mã kết nối, khóa riêng của extension, thiết lập cá nhân, lịch sử tải hay dữ liệu Google Sheets.
